@@ -32,16 +32,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   // Check if user is already logged in on app load
-  useEffect(() => {
-    authService
-      .getUser()
-      .then((user) =>
-        setState({ user, isAuthenticated: true, isLoading: false })
-      )
-      .catch(() =>
-        setState({ user: null, isAuthenticated: false, isLoading: false })
-      );
-  }, []);
+useEffect(() => {
+  authService
+    .getUser()
+    .then((user) => {
+      // console.log('getUser success:', user)
+      setState({ user, isAuthenticated: true, isLoading: false })
+    })
+    .catch((err) => {
+      // console.log('getUser failed:', err.response?.status, err.response?.data)
+      setState({ user: null, isAuthenticated: false, isLoading: false })
+    })
+}, [])
 
   const login = async (payload: LoginPayload) => {
     const { user } = await authService.login(payload);
