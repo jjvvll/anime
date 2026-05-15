@@ -23,7 +23,10 @@ export const animeService = {
     if (payload.thumbnail)   form.append('thumbnail', payload.thumbnail)
 
     const { data } = await api.post<{ message: string; video: AnimeVideo }>('/api/anime-videos', form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+     headers: {
+    'Content-Type': 'multipart/form-data',
+    'Accept': 'application/json',   // ← keep this even on multipart
+  },
       onUploadProgress: (e) => {
         if (onProgress && e.total) {
           onProgress(Math.round((e.loaded * 100) / e.total))
