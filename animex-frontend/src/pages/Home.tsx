@@ -4,9 +4,9 @@ import { useAuth } from '../context/AuthContext'
 import { animeService } from '../services/animeService'
 import type { Anime, AnimePayload, EpisodePayload } from '../types/anime'
 import AnimeCard from '../components/AnimeCard'
-import ModalWrapper from '../components/modals/ModalWrapper'
-import AnimeModal from '../components/modals/AnimeModal'
-import EpisodeModal from '../components/modals/EpisodeModal'
+import ModalWrapper from '../modals/ModalWrapper'
+import AnimeModal from '../modals/AnimeModal'
+import EpisodeModal from '../modals/EpisodeModal'
 
 type ModalMode = 'anime' | 'episode'
 
@@ -45,6 +45,7 @@ export default function Home() {
   }
 
   const handleAnimeSubmit = async (payload: AnimePayload & { thumbnail?: File }) => {
+    console.log(payload);
     const anime = await animeService.create(payload)
     setAnimes((prev) => [anime, ...prev])
     closeModal()

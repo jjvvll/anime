@@ -19,10 +19,11 @@ export const animeService = {
     if (payload.description) form.append('description', payload.description)
     if (payload.genre)       form.append('genre', payload.genre)
     if (payload.thumbnail)   form.append('thumbnail', payload.thumbnail)
-
+console.log('before api request ');
     const { data } = await api.post<{ message: string; anime: Anime }>('/api/animes', form, {
       headers: { 'Content-Type': 'multipart/form-data', 'Accept': 'application/json' },
     })
+    console.log('after api request ');
     return data.anime
   },
 
