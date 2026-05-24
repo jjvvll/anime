@@ -27,6 +27,7 @@ export interface Episode {
   thumbnail_path: string | null
   video_url: string
   thumbnail_url: string | null
+   episodes_count?: number  
   file_size: number | null
   duration: number | null
   status: 'processing' | 'ready' | 'failed'

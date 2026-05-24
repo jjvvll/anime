@@ -1,4 +1,5 @@
 import type { Anime } from '../types/anime'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   anime: Anime
@@ -6,9 +7,15 @@ interface Props {
 }
 
 export default function AnimeCard({ anime, onAddEpisode }: Props) {
+    const navigate = useNavigate();
+
   return (
     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-      <div className="aspect-video bg-gray-100 relative">
+      {/* make thumbnail clickable */}
+      <div
+        className="aspect-video bg-gray-100 relative cursor-pointer"
+        onClick={() => navigate(`/anime/${anime.id}`)}
+      >
         {anime.thumbnail_url ? (
           <img src={anime.thumbnail_url} alt={anime.title} className="w-full h-full object-cover" />
         ) : (
@@ -25,8 +32,13 @@ export default function AnimeCard({ anime, onAddEpisode }: Props) {
         )}
       </div>
 
-      <div className="p-3">
-        <p className="text-sm font-medium text-gray-900 truncate">{anime.title}</p>
+       <div className="p-3">
+        <p
+          className="text-sm font-medium text-gray-900 truncate cursor-pointer hover:text-blue-600 transition-colors"
+          onClick={() => navigate(`/anime/${anime.id}`)}
+        >
+          {anime.title}
+        </p>
         {anime.description && (
           <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{anime.description}</p>
         )}
