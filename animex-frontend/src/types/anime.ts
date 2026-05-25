@@ -6,6 +6,7 @@ export interface Anime {
   genre: string | null
   thumbnail_path: string | null
   thumbnail_url: string | null
+     episodes_count?: number  
   created_at: string
   updated_at: string
   user?: {
