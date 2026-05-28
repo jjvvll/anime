@@ -10,14 +10,29 @@ import WatchEpisode from "./pages/WatchEpisode";
 import Browse from "./pages/Browse";
 import BrowseAnime from "./pages/BrowseAnime";
 import PublicRoute from "./components/PublicRoute";
+import GuestRoute from "./components/GuestRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Auth */}
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              <LoginForm />
+            </GuestRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <GuestRoute>
+              <Register />
+            </GuestRoute>
+          }
+        />
 
         {/* Public - no auth required */}
         <Route
