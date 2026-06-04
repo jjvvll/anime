@@ -1,59 +1,58 @@
-import type { Anime } from '../types/anime'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import type { Anime } from "../types/anime";
 
 interface Props {
-  anime: Anime
-  onAddEpisode: (anime: Anime) => void
+  anime: Anime;
+  onAddEpisode: (anime: Anime) => void;
 }
 
 export default function AnimeCard({ anime, onAddEpisode }: Props) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-      {/* make thumbnail clickable */}
+    <div className="bg-[#111113] border border-zinc-900 rounded-xl overflow-hidden hover:border-zinc-700 transition-colors">
+      {/* Poster */}
       <div
-        className="aspect-video bg-gray-100 relative cursor-pointer"
+        className="aspect-[3/4] bg-zinc-900 relative flex items-center justify-center cursor-pointer"
         onClick={() => navigate(`/anime/${anime.id}`)}
       >
         {anime.thumbnail_url ? (
-          <img src={anime.thumbnail_url} alt={anime.title} className="w-full h-full object-cover" />
+          <img
+            src={anime.thumbnail_url}
+            alt={anime.title}
+            className="w-full h-full object-cover"
+          />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <svg className="w-10 h-10 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75.125v-.375a1.125 1.125 0 011.125-1.125h1.5m0 0A1.125 1.125 0 016 18.375m0 0v-9.75A1.125 1.125 0 017.125 7.5h9.75A1.125 1.125 0 0118 8.625v9.75A1.125 1.125 0 0116.875 19.5H6" />
-            </svg>
-          </div>
+          <span className="text-3xl text-zinc-800">◻</span>
         )}
         {anime.genre && (
-          <span className="absolute top-2 left-2 text-xs bg-black/60 text-white px-2 py-0.5 rounded-full">
+          <span className="absolute top-2 left-2 text-xs bg-black/70 text-zinc-300 px-2 py-0.5 rounded-full">
             {anime.genre}
           </span>
         )}
       </div>
 
-       <div className="p-3">
+      {/* Info */}
+      <div className="px-3 py-2.5">
         <p
-          className="text-sm font-medium text-gray-900 truncate cursor-pointer hover:text-blue-600 transition-colors"
+          className="text-xs font-medium text-zinc-300 truncate mb-1.5 cursor-pointer hover:text-white transition-colors"
           onClick={() => navigate(`/anime/${anime.id}`)}
         >
           {anime.title}
         </p>
-        {anime.description && (
-          <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{anime.description}</p>
-        )}
-        <div className="flex items-center justify-between mt-3">
-          <span className="text-xs text-gray-400">
-            {anime.episodes_count ?? 0} episode{(anime.episodes_count ?? 0) !== 1 ? 's' : ''}
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-zinc-700">
+            {anime.episodes_count ?? 0} ep
+            {(anime.episodes_count ?? 0) !== 1 ? "s" : ""}
           </span>
           <button
             onClick={() => onAddEpisode(anime)}
-            className="text-xs text-blue-600 hover:underline"
+            className="text-xs text-zinc-600 hover:text-white transition-colors"
           >
-            + Add Episode
+            + Add ep
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
